@@ -5,6 +5,7 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.world.item.Items;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Consumer;
 
@@ -15,14 +16,15 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
     }
 
     @Override
-    protected void buildCraftingRecipes(Consumer<FinishedRecipe> craftingRecipes) {
+    protected void buildCraftingRecipes(@NotNull Consumer<FinishedRecipe> craftingRecipes) {
         ShapedRecipeBuilder.shaped(Init.EGG_SAFARI_NET.get())
                 .define('D', Items.DIAMOND)
                 .define('G', Items.GOLD_INGOT)
                 .define('I', Items.IRON_INGOT)
-                .pattern(" D ")
+                .define('B', Items.IRON_BARS)
+                .pattern("BDB")
                 .pattern("IGI")
-                .pattern(" I ")
+                .pattern("BIB")
                 .unlockedBy("by_getting_diamond", has(Items.DIAMOND))
                 .save(craftingRecipes);
 

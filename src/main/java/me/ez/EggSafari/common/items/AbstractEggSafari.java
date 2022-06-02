@@ -17,6 +17,7 @@ import net.minecraft.world.entity.animal.horse.Horse;
 import net.minecraft.world.entity.animal.horse.Llama;
 import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
 import net.minecraft.world.entity.boss.wither.WitherBoss;
+import net.minecraft.world.entity.monster.ElderGuardian;
 import net.minecraft.world.entity.monster.MagmaCube;
 import net.minecraft.world.entity.monster.Slime;
 import net.minecraft.world.entity.player.Player;
@@ -29,6 +30,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
+@SuppressWarnings("ALL")
 public abstract class AbstractEggSafari extends Item {
 
     public AbstractEggSafari(Properties properties) {
@@ -60,18 +62,14 @@ public abstract class AbstractEggSafari extends Item {
                             animal.setVariant(Axolotl.Variant.BY_ID[varient]);
                             write = String.valueOf(animal.getVariant()).toUpperCase();
                         }
-                        if (entity instanceof Parrot animal) {
-                            animal.setVariant(varient);
-                            write = String.valueOf(animal.getVariant()).toUpperCase();
-                        }
                         if (entity instanceof MagmaCube animal) {
                             animal.setSize(varient, false);
                             write = String.valueOf(animal.getSize()).toUpperCase();
                         }
                     }
                     if (entity instanceof Slime || entity instanceof MagmaCube) {
-                        list.add(new TextComponent("Size: " + write).withStyle(ChatFormatting.GOLD));
-                    } else if (entity instanceof Parrot || entity instanceof Axolotl) {
+                        list.add(new TextComponent("Size: " + write + "x" + write).withStyle(ChatFormatting.GOLD));
+                    } else if (entity instanceof Axolotl) {
                         list.add(new TextComponent("Color: " + write).withStyle(ChatFormatting.GOLD));
                     }
                 }
@@ -94,7 +92,7 @@ public abstract class AbstractEggSafari extends Item {
     @Override
     public InteractionResult interactLivingEntity(ItemStack stack, Player player, LivingEntity entity, InteractionHand hand) {
         if (!stack.hasTag() && !player.getAbilities().instabuild) {
-            if (entity instanceof Mob && !(entity instanceof WitherBoss) && !(entity instanceof EnderDragon) && !(entity instanceof IronGolem)) {
+            if (entity instanceof Mob && !(entity instanceof WitherBoss) && !(entity instanceof EnderDragon) && !(entity instanceof IronGolem) && !(entity instanceof ElderGuardian)) {
                 if (hand == InteractionHand.MAIN_HAND) {
                     try {
 
