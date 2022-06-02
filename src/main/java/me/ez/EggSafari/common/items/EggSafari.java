@@ -10,7 +10,10 @@ import net.minecraft.world.entity.animal.Parrot;
 import net.minecraft.world.entity.animal.Sheep;
 import net.minecraft.world.entity.animal.TropicalFish;
 import net.minecraft.world.entity.animal.axolotl.Axolotl;
+import net.minecraft.world.entity.animal.horse.Horse;
 import net.minecraft.world.entity.animal.horse.Llama;
+import net.minecraft.world.entity.animal.horse.Markings;
+import net.minecraft.world.entity.animal.horse.Variant;
 import net.minecraft.world.entity.monster.MagmaCube;
 import net.minecraft.world.entity.monster.Slime;
 import net.minecraft.world.item.DyeColor;
@@ -49,6 +52,7 @@ public class EggSafari extends AbstractEggSafari{
                 if (mob instanceof Slime slime) slime.setSize(stack.getTag().getInt("varient"), false);
                 if (mob instanceof Axolotl axolotl) axolotl.setVariant(Axolotl.Variant.BY_ID[stack.getTag().getInt("varient")]);
                 if (mob instanceof MagmaCube magmaCube) magmaCube.setSize(stack.getTag().getInt("varient"), false);
+                if (mob instanceof Horse horse) horse.setVariantAndMarkings(Variant.byId(stack.getTag().getInt("varient")), Markings.byId(stack.getTag().getInt("markings")));
 
                 if (mob != null) {
                     level.addFreshEntity(mob);
@@ -59,6 +63,9 @@ public class EggSafari extends AbstractEggSafari{
 
                 if (stack.getTag().contains("varient")) {
                     stack.removeTagKey("varient");
+                    if (stack.getTag().contains("markings")){
+                        stack.removeTagKey("markings");
+                    }
                 }
                 stack.removeTagKey("entityHealth");
                 stack.removeTagKey("entity");

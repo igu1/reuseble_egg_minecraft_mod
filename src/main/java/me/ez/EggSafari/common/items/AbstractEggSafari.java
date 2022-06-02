@@ -13,6 +13,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.animal.*;
 import net.minecraft.world.entity.animal.axolotl.Axolotl;
+import net.minecraft.world.entity.animal.horse.Horse;
 import net.minecraft.world.entity.animal.horse.Llama;
 import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
 import net.minecraft.world.entity.boss.wither.WitherBoss;
@@ -105,6 +106,11 @@ public abstract class AbstractEggSafari extends Item {
                         if (entity instanceof Slime slime) stack.getOrCreateTag().putInt("varient", slime.getSize());
                         if (entity instanceof Axolotl axolotl) stack.getOrCreateTag().putInt("varient", axolotl.getVariant().getId());
                         if (entity instanceof MagmaCube magmaCube) stack.getOrCreateTag().putInt("varient", magmaCube.getSize());
+                        if (entity instanceof Horse horse){
+                            stack.getOrCreateTag().putInt("varient", horse.getVariant().getId());
+                            assert stack.getTag() != null;
+                            stack.getTag().putInt("markings", horse.getMarkings().getId());
+                        }
 
                         stack.getOrCreateTag().putString("entity", entity.getType().getRegistryName().toString());
                         stack.getOrCreateTag().putFloat("entityHealth", entity.getHealth());
