@@ -47,7 +47,7 @@ public abstract class AbstractEggSafari extends Item {
                 }
             } else {
                 list.add(new TextComponent("No Entity Inside").withStyle(ChatFormatting.GRAY));
-                list.add(new TextComponent("Only Works In Survival").withStyle(ChatFormatting.GRAY));
+                list.add(new TextComponent("Only Works In Survival").withStyle(ChatFormatting.GRAY).withStyle(ChatFormatting.BOLD));
                 super.appendHoverText(stack, level, list, p_41424_);
             }
         }else {
