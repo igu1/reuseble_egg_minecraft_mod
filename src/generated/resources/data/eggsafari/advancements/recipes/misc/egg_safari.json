@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "eggsafari:egg_safari"
+    ]
+  },
+  "criteria": {
+    "by_getting_diamond": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:diamond"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "eggsafari:egg_safari"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "by_getting_diamond",
+      "has_the_recipe"
+    ]
+  ]
+}

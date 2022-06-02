@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "eggsafari:item/reusable_egg_safari"
+  }
+}
