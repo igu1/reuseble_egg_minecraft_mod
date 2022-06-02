@@ -9,7 +9,10 @@ import net.minecraft.world.entity.animal.Cat;
 import net.minecraft.world.entity.animal.Parrot;
 import net.minecraft.world.entity.animal.Sheep;
 import net.minecraft.world.entity.animal.TropicalFish;
+import net.minecraft.world.entity.animal.axolotl.Axolotl;
 import net.minecraft.world.entity.animal.horse.Llama;
+import net.minecraft.world.entity.monster.MagmaCube;
+import net.minecraft.world.entity.monster.Slime;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
@@ -43,6 +46,9 @@ public class EggSafari extends AbstractEggSafari{
                 if (mob instanceof Parrot parrot) parrot.setVariant(stack.getTag().getInt("varient"));
                 if (mob instanceof TropicalFish fish) fish.setVariant(stack.getTag().getInt("varient"));
                 if (mob instanceof Cat cat) cat.setCatType(stack.getTag().getInt("varient"));
+                if (mob instanceof Slime slime) slime.setSize(stack.getTag().getInt("varient"), false);
+                if (mob instanceof Axolotl axolotl) axolotl.setVariant(Axolotl.Variant.BY_ID[stack.getTag().getInt("varient")]);
+                if (mob instanceof MagmaCube magmaCube) magmaCube.setSize(stack.getTag().getInt("varient"), false);
 
                 if (mob != null) {
                     level.addFreshEntity(mob);
