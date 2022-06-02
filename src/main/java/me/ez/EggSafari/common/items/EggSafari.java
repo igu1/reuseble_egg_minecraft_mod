@@ -5,7 +5,12 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.animal.Cat;
+import net.minecraft.world.entity.animal.Parrot;
 import net.minecraft.world.entity.animal.Sheep;
+import net.minecraft.world.entity.animal.TropicalFish;
+import net.minecraft.world.entity.animal.horse.Llama;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
@@ -33,7 +38,11 @@ public class EggSafari extends AbstractEggSafari{
                     mob.setHealth(stack.getTag().getFloat("entityHealth"));
                 }
 
-                if (mob instanceof Sheep sheep) sheep.setColor(ItIsSheep(stack));
+                if (mob instanceof Sheep sheep) sheep.setColor(DyeColor.byId(stack.getTag().getInt("varient")));
+                if (mob instanceof Llama llama) llama.setVariant(stack.getTag().getInt("varient"));
+                if (mob instanceof Parrot parrot) parrot.setVariant(stack.getTag().getInt("varient"));
+                if (mob instanceof TropicalFish fish) fish.setVariant(stack.getTag().getInt("varient"));
+                if (mob instanceof Cat cat) cat.setCatType(stack.getTag().getInt("varient"));
 
                 if (mob != null) {
                     level.addFreshEntity(mob);
@@ -42,8 +51,8 @@ public class EggSafari extends AbstractEggSafari{
                     mob.setPos(clickedPos.getX(), clickedPos.getY() + 1, clickedPos.getZ());
                 }
 
-                if (mob instanceof Sheep) {
-                    stack.removeTagKey("sheepColor");
+                if (stack.getTag().contains("varient")) {
+                    stack.removeTagKey("varient");
                 }
                 stack.removeTagKey("entityHealth");
                 stack.removeTagKey("entity");

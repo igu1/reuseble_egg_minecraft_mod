@@ -11,9 +11,9 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.animal.IronGolem;
-import net.minecraft.world.entity.animal.Sheep;
+import net.minecraft.world.entity.animal.*;
 import net.minecraft.world.entity.animal.axolotl.Axolotl;
+import net.minecraft.world.entity.animal.horse.Llama;
 import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
 import net.minecraft.world.entity.boss.wither.WitherBoss;
 import net.minecraft.world.entity.player.Player;
@@ -61,26 +61,19 @@ public abstract class AbstractEggSafari extends Item {
     }
 
 
-    public DyeColor ItIsSheep(ItemStack stack) {
-        return DyeColor.byId(stack.getTag().getInt("sheepColor"));
-    }
-
     @Override
     public InteractionResult interactLivingEntity(ItemStack stack, Player player, LivingEntity entity, InteractionHand hand) {
         if (!stack.hasTag() || !player.getAbilities().instabuild) {
             if (entity instanceof Mob && !(entity instanceof WitherBoss) && !(entity instanceof EnderDragon) && !(entity instanceof IronGolem)) {
                 if (hand == InteractionHand.MAIN_HAND) {
                     try {
-                        DyeColor color;
-                        if (entity instanceof Sheep sheep) {
-                            color = sheep.getColor();
-                            stack.getOrCreateTag().putInt("sheepColor", color.getId());
-                        }
-//                        if (entity instanceof Axolotl axolotl) {
-//                            int VarientID = axolotl.getVariant().getId();
-//                            stack.getOrCreateTag().putInt("axolotlVarient", VarientID);
-//
-//                        }
+
+                        if (entity instanceof Sheep sheep) stack.getOrCreateTag().putInt("varient", sheep.getColor().getId());
+                        if (entity instanceof Llama animal) stack.getOrCreateTag().putInt("varient", animal.getVariant());
+                        if (entity instanceof Parrot animal) stack.getOrCreateTag().putInt("varient", animal.getVariant());
+                        if (entity instanceof TropicalFish animal) stack.getOrCreateTag().putInt("varient", animal.getVariant());
+                        if (entity instanceof Cat cat) stack.getOrCreateTag().putInt("varient", cat.getCatType());
+
                         stack.getOrCreateTag().putString("entity", entity.getType().getRegistryName().toString());
                         stack.getOrCreateTag().putFloat("entityHealth", entity.getHealth());
                         entity.remove(Entity.RemovalReason.DISCARDED);
